@@ -287,6 +287,61 @@ with col_plot:
         "PRI simplified relations express this structure through compact geometric formulas."
     )
 
+# ============================
+# Sensitivity Analysis
+# ============================
+st.markdown("---")
+st.subheader("📈 Sensitivity Analysis: How θ Changes Motion")
+
+theta_values_deg = np.linspace(5, 85, 200)
+theta_values_rad = np.radians(theta_values_deg)
+
+R_values = (u ** 2 * np.sin(2 * theta_values_rad)) / g
+H_values = (u ** 2 * (np.sin(theta_values_rad)) ** 2) / (2 * g)
+T_values = (2 * u * np.sin(theta_values_rad)) / g
+
+sensitivity_choice = st.selectbox(
+    "Choose sensitivity view",
+    [
+        "Range R vs Angle θ",
+        "Height H vs Angle θ",
+        "Flight Time T vs Angle θ",
+    ]
+)
+
+fig2, ax2 = plt.subplots(figsize=(9, 4.8))
+
+if sensitivity_choice == "Range R vs Angle θ":
+    ax2.plot(theta_values_deg, R_values)
+    ax2.axvline(theta_deg, linestyle="--", alpha=0.6)
+    ax2.scatter(theta_deg, R_total, s=80)
+    ax2.set_ylabel("Range R (m)")
+    ax2.set_title("Sensitivity of Range to Launch Angle")
+
+elif sensitivity_choice == "Height H vs Angle θ":
+    ax2.plot(theta_values_deg, H_values)
+    ax2.axvline(theta_deg, linestyle="--", alpha=0.6)
+    ax2.scatter(theta_deg, H_max, s=80)
+    ax2.set_ylabel("Maximum Height H (m)")
+    ax2.set_title("Sensitivity of Height to Launch Angle")
+
+else:
+    ax2.plot(theta_values_deg, T_values)
+    ax2.axvline(theta_deg, linestyle="--", alpha=0.6)
+    ax2.scatter(theta_deg, T_total, s=80)
+    ax2.set_ylabel("Flight Time T (s)")
+    ax2.set_title("Sensitivity of Flight Time to Launch Angle")
+
+ax2.set_xlabel("Launch Angle θ (degrees)")
+ax2.grid(True, linestyle="--", alpha=0.6)
+
+st.pyplot(fig2)
+plt.close(fig2)
+
+st.info(
+    "Sensitivity analysis shows how small changes in launch angle θ affect range, "
+    "height, and flight time. This helps reveal the system behavior behind the formulas."
+)
 
 # ============================
 # Footer
