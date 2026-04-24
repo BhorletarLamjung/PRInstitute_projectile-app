@@ -189,7 +189,7 @@ with col_calc:
     st.subheader("🔢 System Solver")
 
     st.markdown("<div class='formula-card'>", unsafe_allow_html=True)
-    st.markdown("**PRI Simplified Relations**")
+    st.markdown("**PRI Simplified Derivations**")
 
     st.latex(r"H = \frac{R}{4}\tan\theta")
     st.latex(r"H = \frac{1}{4}Tu\sin\theta")
