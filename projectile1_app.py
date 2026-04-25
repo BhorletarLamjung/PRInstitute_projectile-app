@@ -76,7 +76,7 @@ st.markdown(
         margin-top: 16px;
     }
     .footer {
-        font-size: 14px;
+        font-size: 20px;
         color: #6B7280;
         text-align: center;
         margin-top: 40px;
